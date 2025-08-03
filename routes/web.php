@@ -1,7 +1,8 @@
 <?php
 
+use App\Livewire\ChatApp;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ChatAppController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/chatapp', [ChatAppController::class, 'index']);
+Route::post('/chatappv1', [ChatAppController::class, 'store1']);
+Route::post('/chatapp', [ChatAppController::class, 'store']);
+Route::get('/chatapp/reset', function () {
+    session()->forget('chat_history');
+    return redirect('/chatapp');
 });
+
+// Route::get("chat-app", ChatApp::class)->name("chat-app");
